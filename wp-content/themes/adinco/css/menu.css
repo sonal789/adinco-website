@@ -1,0 +1,68 @@
+.toggle 
+{
+    color: #efb851;
+    display: block;
+    float: right;
+    text-align: center;
+	font-size: 26px;
+	
+}
+
+.toggle span
+{
+    color: #efb851;
+}
+
+.toggle:hover
+{
+    color: #efb851 !important;
+}
+
+
+.menu 
+{
+
+	font-size: 18px;
+	position: absolute;
+	top: 0 !important;
+	transform: scale(0);
+	transition: transform 0.2s;
+	z-index: 96; 
+}
+.menu.show 
+{
+	transform: scale(1); 
+}
+.menu.menu--right 
+{
+	transform-origin: top right; 
+}
+.menu.menu--left 
+{
+	transform-origin: top left; 
+}
+.menu li 
+{
+	display: inline;
+	line-height: 16px;
+	width: 100%; 
+	padding: 0 30px;
+}
+
+
+.menu a 
+{
+	color: #efb851;
+	display: inline;
+	text-transform:uppercase;
+	text-decoration: none;
+	width: 100%;
+	white-space: nowrap; 
+	font-size:24px;
+	
+}
+.menu a:hover 
+{
+	color: #efb851; 
+	border-bottom:1px solid #efb851;
+}
