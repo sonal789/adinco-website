@@ -12,7 +12,7 @@
 }
 .brandsslider img {
   max-width: 100%;
-  max-width:170px;
+  max-width: 227px;
 }
 .brandsslider 
 {
@@ -37,10 +37,10 @@
 	    padding: 60px 0;
 }
 
-.bxslider li:hover
+/*.bxslider li:hover
 {
 	transform: scale(1.2);
-}
+}*/
 
 .bxslider p
 {
@@ -120,28 +120,31 @@ ul.bxslider {
 }
 /* DIRECTION CONTROLS (NEXT / PREV) */
 .bx-wrapper .bx-prev {
-  left: -10px;
-  background: url('../images/controls.png') no-repeat 0 -32px;
+  left: -20px;
+  /*background: url('../images/controls.png') no-repeat 0 -32px;*/
+  background: url('../images/arrow.png') no-repeat;
 }
 .bx-wrapper .bx-prev:hover,
 .bx-wrapper .bx-prev:focus {
-  background-position: 0 0;
+  /*background-position: 0 0;*/
+  opacity:0.8;
 }
 .bx-wrapper .bx-next {
-  right: -10px;
-  background: url('../images/controls.png') no-repeat -43px -32px;
+  right: -20px;
+  /*background: url('../images/controls.png') no-repeat -43px -32px;*/
+  background: url('../images/arrow.png') no-repeat ;
 }
 .bx-wrapper .bx-next:hover,
 .bx-wrapper .bx-next:focus {
-  background-position: -43px 0;
+ opacity:0.8;
 }
 .bx-wrapper .bx-controls-direction a {
   position: absolute;
   top: 48%;
   margin-top: -16px;
   outline: 0;
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 74px;
   text-indent: -9999px;
   z-index: 9999;
 }

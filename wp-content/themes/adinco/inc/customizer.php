@@ -93,4 +93,24 @@ function create_my_events() {
 
 add_action( 'init', 'create_my_events' );
 
+
+// My Events
+function create_recipes() {
+	register_post_type( 'recipes',
+			array(
+			'labels' => array(
+					'name' => __( 'Recipes' ),
+					'singular_name' => __( 'Recipes' ),
+			),
+			'public' => true,
+			'has_archive' => false,
+			'supports' => array(
+					'title',
+					
+			)
+	));
+}
+
+add_action( 'init', 'create_recipes' );
+
 ?>

@@ -9,7 +9,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<title>Adinco Website</title>
+	<title>Adinco Distilleries</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 	<link href="https://fonts.googleapis.com/css?family=BenchNine|Open+Sans+Condensed:300,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Lobster+Two" rel="stylesheet">
@@ -18,9 +18,11 @@
 	<link href="<?php echo esc_url( get_template_directory_uri() ); ?>/css/jquery.bxslider.css" rel="stylesheet" />
 
 	<link href="<?php echo esc_url( get_template_directory_uri() ); ?>/style.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="<?php echo esc_url( get_template_directory_uri() ); ?>/css/demo.css" />
 	<link href="<?php echo esc_url( get_template_directory_uri() ); ?>/css/colorbox.css" rel="stylesheet" />
-	
-	
+	<link href="<?php echo esc_url( get_template_directory_uri() ); ?>/css/aos.css" rel="stylesheet" />
+	<link href="<?php echo esc_url( get_template_directory_uri() ); ?>/css/litetooltip.css" rel="stylesheet" />
+	<link href="<?php echo esc_url( get_template_directory_uri() ); ?>/css/animate.min.css" rel="stylesheet" />
 	
 	
 
@@ -34,6 +36,60 @@
 </head>
 
 <body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+ <div id="wptime-plugin-preloader"></div>
+ 
+
+<link href="<?php echo esc_url( get_template_directory_uri() ); ?>/css/jquery-confirm.css" rel="stylesheet" />
+<script src="<?php echo esc_url( get_template_directory_uri() ); ?>/js/jquery-confirm.js"></script>
+        <script>
+			if (sessionStorage.getItem('AnnouncementOnce') !== 'true') {
+				$(document).ready(function(){ 
+					$.confirm({
+						icon: 'fa fa-question',
+						theme: 'supervan',
+						closeIcon: false,
+						animation: 'scale',
+						type: 'orange',
+						 columnClass: 'col-md-8 col-md-offset-2 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1',
+						title: '<div><img src="<?php echo esc_url( get_template_directory_uri() ); ?>/images/adinco_logo_full.png" width="250px"/><br/><br/>Adinco Distilleries is committed to Responsible Drinking</div>',
+						content: 'This website is meant to be enjoyed by people of legal drinking age.<br/>Are you of legal drinking age in your country ?',
+						icon: 'fa fa-warning',
+						animation: 'scale',
+						closeAnimation: 'zoom',
+						buttons: {
+							confirm: {
+								text: 'Yes',
+								btnClass: 'btn-orange',	
+								action: function () { 
+									//$.alert('test');
+									sessionStorage.setItem('AnnouncementOnce','true');
+								}
+								
+							},
+							cancel: {
+								text: 'No',
+								action: function () {
+								
+								$.alert('You may not enter this website');
+								window.location = '<?php echo esc_url( home_url( '/' ) ); ?>/notlegalage/';
+								sessionStorage.setItem('AnnouncementOnce','false');
+								}
+							}	
+						}
+						
+					});
+					
+				});    
+			
+				
+			}
+			
+        </script>
+
+ 
+
 
 <header>
 	<nav class="navbar">

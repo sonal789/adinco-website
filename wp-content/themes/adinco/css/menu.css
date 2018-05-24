@@ -36,6 +36,7 @@
 .menu.menu--right 
 {
 	transform-origin: top right; 
+	padding:0;
 }
 .menu.menu--left 
 {

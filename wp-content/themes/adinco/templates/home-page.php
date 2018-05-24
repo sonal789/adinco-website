@@ -12,10 +12,15 @@ get_header(); ?>
  
  <section class="h-slider no-padding">
 	
-			
-				
-	<div id="myCarousel" class="carousel slide" data-ride="carousel">
-	
+	<?php 
+//echo do_shortcode('[smartslider3 slider=2]');
+?>
+
+
+
+      <!-- carousel code -->
+      <div id="carouselExampleIndicators" class="carousel slide carousel-fade">
+	  
 		<?php
 			$args = array(
 				'post_type' => 'my-slider-post',
@@ -25,61 +30,61 @@ get_header(); ?>
 			$the_query = new WP_Query ( $args );
 		?>
 		
-		
-		<!-- Indicators -->
-				<ol class="carousel-indicators">
+		<ol class="carousel-indicators">
 
-					<!-- the Loop -->
-					<?php if ( have_posts() ) : while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
-						<li data-target="#myCarousel"
-						    data-slide-to="<?php echo $the_query->current_post; ?>"
-						    class="<?php if ( $the_query->current_post == 0 ) : ?>active<?php endif; ?>"></li>
-					<?php endwhile; endif; ?>
+			<!-- the Loop -->
+			<?php if ( have_posts() ) : while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
+				<li data-target="#myCarousel"
+					data-slide-to="<?php echo $the_query->current_post; ?>"
+					class="<?php if ( $the_query->current_post == 0 ) : ?>active<?php endif; ?>"></li>
+			<?php endwhile; endif; ?>
 
-				</ol>
+		</ol>
+	  
+		<!-- rewind loop back to zero without losing data-->
+		<?php rewind_posts(); ?>
 
-				<!-- rewind loop back to zero without losing data-->
-				<?php rewind_posts(); ?>
+		<!-- Wrapper for slides -->
+		<div class="carousel-inner skyblue">
+			<?php if ( have_posts() ) : while ( $the_query->have_posts() ) :
+				$the_query->the_post(); ?>
 
-				<!-- Wrapper for slides -->
-				<div class="carousel-inner">
-
-					<?php if ( have_posts() ) : while ( $the_query->have_posts() ) :
-						$the_query->the_post(); ?>
-
-						<?php
-						$thumbnail_id   = get_post_thumbnail_id();
-						$thumbnail_url  = wp_get_attachment_image_src( $thumbnail_id, 'thumbnail-size', true );
-						$thumbnail_meta = get_post_meta( $thumbnail_id, '_wp_attatchment_image_alt', true );
-						?>
-						
-						<div class="carousel-item <?php if ( $the_query->current_post == 0 ) : ?>active<?php endif; ?>" style="background: url(<?php echo $thumbnail_url[0]; ?>) no-repeat; background-size:cover;background-attachment:fixed;">
-          
-							<div class="container">
-							  <div class="carousel-caption text-right">
-								<h1><?php the_title(); ?></h1>
-							  </div>
-							</div>
-						</div>
-
-						
-					<?php endwhile;
-					endif; ?>
-
+				<?php
+				$thumbnail_id   = get_post_thumbnail_id();
+				$thumbnail_url  = wp_get_attachment_image_src( $thumbnail_id, 'thumbnail-size', true );
+				$thumbnail_meta = get_post_meta( $thumbnail_id, '_wp_attatchment_image_alt', true );
+				?>
+				
+				<div class="carousel-item <?php if ( $the_query->current_post == 0 ) : ?>active<?php endif; ?>" style="background: url(<?php echo $thumbnail_url[0]; ?>) no-repeat; background-size:cover;background-attachment:fixed;">
+  
+					
+					  <div class="carousel-caption d-md-block ">
+						  <h1 class="text-right" data-animation="animated bounceInUp"><?php the_title(); ?></h1>
+					  </div>
+					
 				</div>
-				
-				<!-- Controls -->
-				<a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					<span class="sr-only">Previous</span>
-				</a>
-				<a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-					<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					<span class="sr-only">Next</span>
-				</a>
 
 				
+			<?php endwhile;
+			endif; ?>
+
+		</div>
+       
+        
+
+        <!-- controls -->
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
       </div>
+
+ 
+				
 	  
 </section>
 
@@ -93,15 +98,15 @@ get_header(); ?>
 				<img class="distillery-img" src="<?php echo the_field('about_image', $post->ID); ?>" alt="About Adinco Distillaries" />
 				
 			</div>
-			<div class="col-md-5">
+			<div class="col-md-4">
 				<h1 class="title">Our Uniqueness</h1>
 				<div class="title-separator"><img  src="<?php echo esc_url( get_template_directory_uri() ); ?>/images/title-bg.png" alt=""></div>
 				<?php the_field('about_text' , $post->ID ); ?> 
-				<a class="btn ad-btn" href="#"> <div class="btnprt1">Know More</div><div class="btnprt2"> <i class="fas fa-angle-right"></i> </div></a>
+				<a class="btn ad-btn" href="<?php echo get_site_url()?>/about/"> <div class="btnprt1">Know More</div><div class="btnprt2"> <i class="fas fa-angle-right"></i> </div></a>
 			</div>
 		</div>
 		
-		<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/images/barley-leaf.png"  class="barley"/>
+		<img data-aos="fade-left" data-aos-duration="1000" src="<?php echo esc_url( get_template_directory_uri() ); ?>/images/barley-leaf.png"  class="barley"/>
 		
 	
 </section>
@@ -144,62 +149,85 @@ get_header(); ?>
 								
 							?>
 						</div>
-						<div><?php the_field('event_details',$post->ID); ?></div>
+						<div><?php echo substr(get_field('event_details',$post->ID), 0, 140); ?>...</div>
+						<a class="btn ad-btn" href="<?php echo get_site_url()?>/events/event-details/?eid=<?php echo $post->ID; ?>&event=<?php the_title();?>"> <div class="btnprt1">Know More</div><div class="btnprt2"> ></div></a>
 					</div>
 			  </div>
 			</div>
 		</div>
 		<?php $i++ ;}  endwhile;
 			endif;  ?>
+		
+<?php global $wp_query;
+					$post->ID = 7;
+					?>		
 		<div class="grid1-item">
+		
+		
 			<div class="sblock1-t gold-block">
 				<div class="bxslider1 eventslider" style="position:relative;">
-					<div><img src="<?php echo esc_url( get_template_directory_uri() ); ?>/images/wine-glass.png" title="Funky roots"></div>
+					<div><a href="<?php echo the_field('grid_1_link', $post->ID); ?>"><img src="<?php echo the_field('grid_1_image', $post->ID); ?>"></a></div>
 					<div style="width:100%;" class="slide-text">
 					
-						<div class="rottext">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ante metus, lacinia sed orci id, venenatis commodo sapien. 
-						</div>
+					<div class="rottext">
+					<?php echo the_field('grid_1_text', $post->ID); ?> 
+					<br/>
+					<br/>
+					<a class="btn ad-btn" href="<?php echo the_field('grid_1_link', $post->ID); ?>"> <div class="btnprt1">Know More</div><div class="btnprt2"> <i class="fas fa-angle-right"></i> </div></a>
+					</div>
 					
 					</div>
 				</div>
 				
 			</div>
+			
+			
 			<div class="sblock1-b red-block">
 				<div class="bxslider2 eventslider">
 					<div style="width:100%;" class="slide-text">
 					
 						<div class="rottext">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ante metus, lacinia sed orci id, venenatis commodo sapien. 
+						<?php echo the_field('grid_3_text', $post->ID); ?> 
+						<br/>
+						<br/>
+						<a class="btn ad-btn" href="<?php echo the_field('grid_3_link', $post->ID); ?>"> <div class="btnprt1">Know More</div><div class="btnprt2"> <i class="fas fa-angle-right"></i> </div></a>
 						</div>
 					
 					</div>
-					<div class="red-block"><img src="<?php echo esc_url( get_template_directory_uri() ); ?>/images/wine-glass.png" title="Funky roots"></div>
+					<div><a href="<?php echo the_field('grid_3_link', $post->ID); ?>"><img src="<?php echo the_field('grid_3_image', $post->ID); ?>"></a></div>
 				</div>
 			</div>
 		</div>
+		
+		
 		<div class="grid1-item">
 			<div class="sblock1-t red-block">
 				<div class="bxslider3 eventslider">
 					<div style="width:100%;" class="slide-text">
 					
 						<div class="rottext">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ante metus, lacinia sed orci id, venenatis commodo sapien. 
+						<?php echo the_field('grid_2_text', $post->ID); ?> 
+						<br/>
+						<br/>
+						<a class="btn ad-btn" href="<?php echo the_field('grid_2_link', $post->ID); ?>"> <div class="btnprt1">Know More</div><div class="btnprt2"> <i class="fas fa-angle-right"></i> </div></a>
 						</div>
 					
 					</div>
-					<div ><img src="<?php echo esc_url( get_template_directory_uri() ); ?>/images/whiskey-glass.png" title="Funky roots"></div>
+					<div><a href="<?php echo the_field('grid_2_link', $post->ID); ?>"><img src="<?php echo the_field('grid_2_image', $post->ID); ?>"></a></div>
 				</div>
 			</div>
 			<div class="sblock1-b gold-block">
 				<div class="bxslider4 eventslider">
-					<div><img src="<?php echo esc_url( get_template_directory_uri() ); ?>/images/whiskey-glass.png" title="Funky roots"></div>
+				
+					<div><a href="<?php echo the_field('grid_4_link', $post->ID); ?>"><img src="<?php echo the_field('grid_4_image', $post->ID); ?>"></a></div>
 					<div style="width:100%;" class="slide-text">
 					
 						<div class="rottext">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ante metus, lacinia sed orci id, venenatis commodo sapien. 
+						<?php echo the_field('grid_4_text', $post->ID); ?> 
+						<br/>
+						<br/>
+						<a class="btn ad-btn" href="<?php echo the_field('grid_4_link', $post->ID); ?>"> <div class="btnprt1">Know More</div><div class="btnprt2"> <i class="fas fa-angle-right"></i> </div></a>
 						</div>
-					
 					</div>
 				</div>
 			</div>
@@ -233,11 +261,19 @@ get_header(); ?>
 				if(get_field('featured',$post->ID)!=''){ 
 			?>
 			
-			<li>
-				<a href="#">
-				<img src="<?php echo the_field('product_image'); ?>" />
-				<p><?php the_title(); ?></p>
-				</a>
+			<li class="featuredp">
+				<div class=" tileme tile scale-anm <?php  echo $category[0]->cat_name; ?> all text-center">
+					<div class="overlay-text1">
+					<a href="<?php echo get_site_url()?>/products/?pid=<?php echo $post->ID; ?>&product=<?php the_title();?>">
+					<img src="<?php echo the_field('product_image'); ?>" />
+					</a>
+					<a class="ttitle" href="<?php echo get_site_url()?>/products/?pid=<?php echo $post->ID; ?>&product=<?php the_title();?>">
+					<?php the_title(); ?>
+					</a>
+					</div>
+						
+				</div>
+					
 			</li>
 			
 				<?php } endwhile;
@@ -249,10 +285,10 @@ get_header(); ?>
 <?php global $wp_query;
 					$post->ID = 7;
 					?>
-<section class="h-cta" style="background:url(<?php echo the_field('cta_background', $post->ID); ?>) no-repeat;">
+<section class="h-cta" style="background:url(<?php echo the_field('cta_background', $post->ID); ?>) no-repeat;" data-aos="zoom-in">
 	<div class="subscribe">
 		<h2><?php echo the_field('cta_text', $post->ID); ?></h2>
-		<a class="btn ad-btn" href="#"> <div class="btnprt1">Sign Up</div><div class="btnprt2"> <i class="fas fa-angle-right"></i> </div></a>
+		<a class="btn ad-btn inline" href="#inline_content"> <div class="btnprt1">Sign Up</div><div class="btnprt2"> <i class="fas fa-angle-right"></i> </div></a>
 	</div>
 </section>
 
@@ -260,15 +296,23 @@ get_header(); ?>
 
 	<div class="row no-gutters">
 		<div class="col-md-8 no-padding">
-			<section id="cd-google-map" class="no-padding">
-				<div id="google-container"></div>
-				<div id="cd-zoom-in"></div>
-				<div id="cd-zoom-out"></div>
-				<address>86-90 Paul Street, London, EC2A 4NE</address> 
-			</section>
+		
+		<div class="imagehotspot-container" style="position: relative; ">
+			    <div style="position: relative; ">
+			   
+			   <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/images/Adinco_Map dark.jpg" style="width:100%;height:auto;" />
+				    <div id="photspot1" class="photspot pulse-white" style="position: absolute; z-index: 103; width: 3.3%; height: 4.1%; top: 59.00%; left: 69.00%;"><span>&nbsp;</span></div>
+				    <div id="photspot2" class="photspot pulse-white" style="position: absolute; z-index: 103; width: 3.3%; height: 4.1%;   top: 53.7%; left: 63.2%;"><span>&nbsp;</span></div>
+				    		    
+			    </div>
+			    </div>
+
+		
+			
+			
 		</div>
 		<div class="col-md-4  h-contact no-padding">
-			<div class="contactinfo">
+			<div class="contactinfo rottext">
 				<h3>Visit Us</h3>
 				<p>
 					<?php echo the_field('address', $post->ID); ?>

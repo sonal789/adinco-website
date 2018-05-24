@@ -69,14 +69,21 @@ get_header();
 				
 
 				
-					
-						<div class="col-md-3 tileme tile scale-anm <?php  echo $category[0]->cat_name; ?> all text-center">
+						
+						<div class=" col-md-3 tileme tile brnbtl scale-anm text-center <?php  echo $category[0]->cat_name; ?> all text-center">
+							
+							<div class="overlay-text1">
 							<a href="<?php echo get_site_url()?>/products/?pid=<?php echo $post->ID; ?>&product=<?php the_title();?>">
-								<img  src="<?php the_field('product_image'); ?>" alt="<?php the_title(); ?>"/><br/>
+								<img  class="" src="<?php the_field('product_image'); ?>" alt="<?php the_title(); ?>"/>
 							</a>
 							<a class="ttitle" href="<?php echo get_site_url()?>/products/?pid=<?php echo $post->ID; ?>&product=<?php the_title();?>"><?php the_title();?></a>
 							
+							</div>
+							
+							
 						</div>
+						
+						
 					
 					
 				
@@ -95,10 +102,10 @@ get_header();
 <?php global $wp_query;
 					$post->ID = 7;
 					?>
-<section class="h-cta" style="background:url(<?php echo the_field('cta_background', $post->ID); ?>) no-repeat;">
+<section class="h-cta" style="background:url(<?php echo the_field('cta_background', $post->ID); ?>) no-repeat;" data-aos="zoom-in">
 	<div class="subscribe">
 		<h2><?php echo the_field('cta_text', $post->ID); ?></h2>
-		<a class="btn ad-btn" href="#"> <div class="btnprt1">Sign Up</div><div class="btnprt2"> <i class="fas fa-angle-right"></i> </div></a>
+		<a class="btn ad-btn inline" href="#inline_content"> <div class="btnprt1">Sign Up</div><div class="btnprt2"> <i class="fas fa-angle-right"></i> </div></a>
 	</div>
 </section>
 
